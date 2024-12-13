@@ -1,0 +1,28 @@
+version: '2'
+services:
+  web:
+    image: linkverba/cacti:v1.2.26
+    ports:
+     - "8080:80"
+    depends_on:
+     - db
+    entrypoint:
+      - /start.sh
+    environment:
+      CACTI_ADMIN_USER: admin
+      CACTI_ADMIN_PASS: admin
+      RDB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      RDB_NAME: cacti
+      RDB_PASS: root
+      RDB_USER: root
+      DB_HOST: db
+      DB_NAME: cacti
+      RDB_PORT: 3306
+      DB_PASS: root
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cacti
